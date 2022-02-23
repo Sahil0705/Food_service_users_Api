@@ -1,0 +1,52 @@
+[
+	{
+		"_id":"619456f97babcf2dd8c9c388",
+		"ranking":1,
+		"name":"Christian COLEMAN",
+		"dob":"1996-03-05T18:30:00.000Z",
+		"country":"USA",
+		"score":1477,
+		"event":"100m",
+		"__v":0
+	},
+	{
+		"_id":"61945999067b251465b07f14",
+		"ranking":2,
+		"name":"Justin GATLIN",
+		"dob":"1982-02-09T18:30:00.000Z",
+		"country":"USA",
+		"score":1428,
+		"event":"100m",
+		"__v":0
+	},
+	{
+		"_id":"61945a05b971baaccce2df3d",
+		"ranking":3,
+		"name":"Akani SIMBINE",
+		"dob":"1993-09-20T18:30:00.000Z",
+		"country":"RSA",
+		"score":1392,
+		"event":"100m",
+		"__v":0
+	},
+	{
+		"_id":"61945a373a32b979d35e0fc8",
+		"ranking":4,
+		"name":"Zharnel HUGHES",
+		"dob":"1995-07-18T18:30:00.000Z",
+		"country":"GER",
+		"score":1379,
+		"event":"100m",
+		"__v":0
+	},
+	{
+		"_id":"619468210e66b1467d809fb7",
+		"ranking":5,
+		"name":"Yohan BLAKE",
+		"dob":"1989-12-25T18:30:00.000Z",
+		"country":"JAM",
+		"score":1377,
+		"event":"100m",
+		"__v":0
+	}
+]
