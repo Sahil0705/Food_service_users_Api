@@ -1,5 +1,4 @@
 const express = require("express");
-const UsersRanking = require("../src/models/users.js");
 const router = require("../src/routers/user.js");
 const app = express();
 
@@ -12,6 +11,10 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 app.use(router);
+
+//var cors = require('cors')
+
+//app.use(cors()) // Use this after the variable declaration
 
 const cors = require('cors');
 const corsOptions ={

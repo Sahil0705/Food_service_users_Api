@@ -4,6 +4,8 @@ const router = new express.Router();
 
 const userRanking = require("../models/users.js");
 
+const contactDetails = require("../models/contact.js");
+
 router.get("/",(req,res)=>
 {
     res.send("<h2 align='center'><br>Please click on this link to view the API: - <a href='/users'>Link</a></h2>");
@@ -14,7 +16,7 @@ router.post("/users",async(req,res)=>
     try
     {
         const addingUsersRecord = new userRanking(req.body);
-        console.log(req.body);
+        console.log("@ ",req.body);
         const insertUsers = await addingUsersRecord.save();
         res.status(201).send(insertUsers);
     }
@@ -25,12 +27,15 @@ router.post("/users",async(req,res)=>
     }
 });
 
-router.get("/users",async(req,res)=>
+router.get("/users/:_id",async(req,res)=>
 {
     try
     {
-        const getUsers = await userRanking.find().sort({"ranking":1});
-        res.send(getUsers);
+        const _id = req.params;
+        console.log(_id);
+        const getUser = await userRanking.find(_id);
+        console.log(getUser);
+        res.send(getUser);
     }
     catch(err)
     {
@@ -38,14 +43,13 @@ router.get("/users",async(req,res)=>
     }
 });
 
-router.get("/users/:_id",async(req,res)=>
+router.get("/users",async(req,res)=>
 {
     try
     {
-        const _id = req.params;
-        const getUser = await userRanking.find(_id);
-        console.log(getUser);
-        res.send(getUser);
+        const getUsers = await userRanking.find().sort({"ranking":1});
+        console.log(getUsers);
+        res.send(getUsers);
     }
     catch(err)
     {
@@ -58,6 +62,7 @@ router.patch("/users/:_id",async(req,res)=>
     try
     {
         const _id = req.params;
+        console.log("Update",_id);
         const getUser = await userRanking.findByIdAndUpdate(_id,req.body,{new:true});
         console.log(getUser);
         res.send(getUser);
@@ -83,7 +88,85 @@ router.delete("/users/:_id",async(req,res)=>
     }
 });
 
-router.get("/users/*",(req,res)=>
+
+router.post("/contacts",async(req,res)=>
+{
+    try
+    {
+        const addingcontactRecord = new contactDetails(req.body);
+        console.log("Hello ",req.body);
+        const insertcontact = await addingcontactRecord.save();
+        res.status(201).send(insertcontact);
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(400).send(error);
+    }
+});
+
+router.get("/contacts/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        console.log(_id);
+        const getcontact = await contactDetails.find(_id);
+        console.log(getcontact);
+        res.send(getcontact);
+    }
+    catch(err)
+    {
+        res.status(400).send(err);
+    }
+});
+
+router.get("/contacts",async(req,res)=>
+{
+    try
+    {
+        const getcontact = await contactDetails.find().sort({"ranking":1});
+        console.log(getcontact);
+        res.send(getcontact);
+    }
+    catch(err)
+    {
+        res.status(400).send(err);
+    }
+});
+
+router.patch("/contacts/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        console.log("Update",_id);
+        const getcontact = await contactDetails.findByIdAndUpdate(_id,req.body,{new:true});
+        console.log(getcontact);
+        res.send(getcontact);
+    }
+    catch(err)
+    {
+        res.status(500).send(err);
+    }
+});
+
+router.delete("/contacts/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        const getcontact = await contactDetails.findByIdAndDelete(_id);
+        console.log(getcontact);
+        res.send(getcontact);
+    }
+    catch(err)
+    {
+        res.status(500).send(err);
+    }
+});
+
+router.get("/contacts/*",(req,res)=>
 {
     res.render("404_error",
     {
@@ -98,5 +181,21 @@ router.get("/*",(req,res)=>
         errorMsg:"Oops 😖 !! Page not found ❌"
     });
 });
+
+// router.get("/users/*",(req,res)=>
+// {
+//     res.render("404_error",
+//     {
+//         errorMsg:"Oops 😖 !! Page not found ❌"
+//     });
+// });
+
+// router.get("/*",(req,res)=>
+// {
+//     res.render("404_error",
+//     {
+//         errorMsg:"Oops 😖 !! Page not found ❌"
+//     });
+// });
 
 module.exports = router;
