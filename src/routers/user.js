@@ -184,6 +184,52 @@ router.post("/cart",async(req,res)=>
     }
 });
 
+router.get("/cart",async(req,res)=>
+{
+    try
+    {
+        const getcart = await cartDetails.find().sort({"ranking":1});
+        console.log(getcart);
+        res.send(getcart);
+    }
+    catch(err)
+    {
+        res.status(400).send(err);
+    }
+});
+
+router.get("/cart/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        console.log(_id);
+        const getcart = await cartDetails.find(_id);
+        console.log(getcart);
+        res.send(getcart);
+    }
+    catch(err)
+    {
+        res.status(400).send(err);
+    }
+});
+
+router.patch("/cart/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        console.log("Update",_id);
+        const getcart = await cartDetails.findByIdAndUpdate(_id,req.body,{new:true});
+        console.log(getcart);
+        res.send(getcart);
+    }
+    catch(err)
+    {
+        res.status(500).send(err);
+    }
+});
+
 router.delete("/cart/:_id",async(req,res)=>
 {
     try
