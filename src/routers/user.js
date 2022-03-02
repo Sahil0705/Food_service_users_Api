@@ -6,6 +6,8 @@ const userRanking = require("../models/users.js");
 
 const contactDetails = require("../models/contact.js");
 
+const cartDetails = require("../models/cart.js");
+
 router.get("/",(req,res)=>
 {
     res.send("<h2 align='center'><br>Please click on this link to view the API: - <a href='/users'>Link</a></h2>");
@@ -159,6 +161,37 @@ router.delete("/contacts/:_id",async(req,res)=>
         const getcontact = await contactDetails.findByIdAndDelete(_id);
         console.log(getcontact);
         res.send(getcontact);
+    }
+    catch(err)
+    {
+        res.status(500).send(err);
+    }
+});
+
+router.post("/cart",async(req,res)=>
+{
+    try
+    {
+        const addingCartsRecord = new cartDetails(req.body);
+        console.log("@ ",req.body);
+        const insertCart = await addingCartsRecord.save();
+        res.status(201).send(insertCart);
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(400).send(error);
+    }
+});
+
+router.delete("/cart/:_id",async(req,res)=>
+{
+    try
+    {
+        const _id = req.params;
+        const getcart = await contactDetails.findByIdAndDelete(_id);
+        console.log(getcart);
+        res.send(getcart);
     }
     catch(err)
     {
