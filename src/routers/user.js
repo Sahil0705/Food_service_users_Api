@@ -190,7 +190,7 @@ router.get("/cart",async(req,res)=>
     {
         const getcart = await cartDetails.find().sort({"ranking":1});
         console.log(getcart);
-        res.send(getcart);
+        //res.send(getcart);
     }
     catch(err)
     {
@@ -198,15 +198,14 @@ router.get("/cart",async(req,res)=>
     }
 });
 
-router.get("/cart/:_id",async(req,res)=>
+router.get("/cartallItemsByEmail",async(req,res)=>
 {
     try
     {
-        const _id = req.params;
-        console.log(_id);
-        const getcart = await cartDetails.find(_id);
+        const emailId = req.query.emailId;
+        const getcart = await cartDetails.find({emailId:emailId});
         console.log(getcart);
-        res.send(getcart);
+        res.send("Hello"+" "+emailId+" "+getcart);
     }
     catch(err)
     {
@@ -214,12 +213,30 @@ router.get("/cart/:_id",async(req,res)=>
     }
 });
 
-router.patch("/cart/:_id",async(req,res)=>
+router.get("/cartanItem",async(req,res)=>
 {
     try
     {
-        const _id = req.params;
-        console.log("Update",_id);
+        const emailId = req.query.emailId;
+        const prodId = req.query.prodId;
+        const _id = req.query._id;
+        const getcart = await cartDetails.findById(_id,{emailId:emailId,prodId:prodId});
+        console.log(getcart);
+        res.send("Hi"+" "+emailId+" "+getcart);
+    }
+    catch(err)
+    {
+        res.status(400).send(err);
+    }
+});
+
+router.patch("/cart",async(req,res)=>
+{
+    try
+    {
+        const emailId = req.query.emailId;
+        const prodId = req.query.prodId;
+        console.log("Update",emailId,prodId);
         const getcart = await cartDetails.findByIdAndUpdate(_id,req.body,{new:true});
         console.log(getcart);
         res.send(getcart);
@@ -230,12 +247,15 @@ router.patch("/cart/:_id",async(req,res)=>
     }
 });
 
-router.delete("/cart/:_id",async(req,res)=>
+router.delete("/cart",async(req,res)=>
 {
     try
     {
-        const _id = req.params;
-        const getcart = await contactDetails.findByIdAndDelete(_id);
+        const emailId = req.query.emailId;
+        const prodId = req.query.prodId;
+        const _id = req.query._id;
+        const getcart = await cartDetails.findByIdAndDelete(_id,{emailId:emailId,prodId:prodId});
+        // res.send("Hello"+_id+" "+emailId+" "+prodId);
         console.log(getcart);
         res.send(getcart);
     }
