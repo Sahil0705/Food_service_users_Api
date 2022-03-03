@@ -205,7 +205,7 @@ router.get("/cartallItemsByEmail",async(req,res)=>
         const emailId = req.query.emailId;
         const getcart = await cartDetails.find({emailId:emailId});
         console.log(getcart);
-        //res.send("Hello"+" "+emailId+" "+getcart);
+        res.send("Hello"+" "+emailId+" "+getcart);
     }
     catch(err)
     {
@@ -222,7 +222,7 @@ router.get("/cartanItem",async(req,res)=>
         const _id = req.query._id;
         const getcart = await cartDetails.findById(_id,{emailId:emailId,prodId:prodId});
         console.log(getcart);
-        //res.send("Hi"+" "+emailId+" "+getcart);
+        res.send("Hi"+" "+emailId+" "+getcart);
     }
     catch(err)
     {
