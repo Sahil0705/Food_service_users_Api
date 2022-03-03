@@ -254,9 +254,9 @@ router.delete("/cart",async(req,res)=>
         const emailId = req.query.emailId;
         const prodId = req.query.prodId;
         const _id = req.query._id;
+        //res.send(emailId+" "+prodId);
+        console.log(prodId+" "+emailId+" "+_id);
         const getcart = await cartDetails.findByIdAndDelete(_id,{emailId:emailId,prodId:prodId});
-        // res.send("Hello"+_id+" "+emailId+" "+prodId);
-        console.log(getcart);
         res.send(getcart);
     }
     catch(err)
