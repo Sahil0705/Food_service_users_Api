@@ -188,9 +188,9 @@ router.get("/cart",async(req,res)=>
 {
     try
     {
-        const getcart = await cartDetails.find().sort({"ranking":1});
+        const getcart = await cartDetails.find().sort();
         console.log(getcart);
-        //res.send(getcart);
+        res.send(getcart);
     }
     catch(err)
     {
