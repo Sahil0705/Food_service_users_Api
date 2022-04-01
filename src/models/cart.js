@@ -10,6 +10,10 @@ const cartSchema = mongoose.Schema(
         {
             type:String
         },
+        prodImg:
+        {
+            type:String
+        },
         prodName:
         {
             type:String
